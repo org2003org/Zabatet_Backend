@@ -29,7 +29,7 @@ export const createUser = async (req, res) => {
         user.passwordHash = undefined;
         const token = getToken(user);
         res.cookie("token", token, cookieOptions);
-        return res.status(201).json(new ApiResponse(201, { user }, "User created successfully"));
+        return res.status(201).json(new ApiResponse(201, { user, token }, "User created successfully"));
     } else {
         throw new ApiError(400, "email and password are required");
     }
