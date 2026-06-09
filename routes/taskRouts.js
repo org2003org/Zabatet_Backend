@@ -1,5 +1,6 @@
-import { createTask, getAllTasks, getTasksByBoard, getTaskById, updateTask, deleteTask, getTasksBySprint, assignUserToTask, updateTaskStatus, addLabelsToTask } from '../controllers/taskController.js';
+import { createTask, getAllTasks, getTasksByBoard, getTaskById, updateTask, deleteTask, getTasksBySprint, assignUserToTask, updateTaskStatus, addLabelsToTask, updateTaskPriority, assignStoryPoints, moveTaskToSprint } from '../controllers/taskController.js';
 import express from 'express';
+import authMiddleware from '../middlewares/auth.js';
 
 const router = express.Router();
 
@@ -9,6 +10,13 @@ router.post('/', createTask);
 router.get('/', getAllTasks);
 // Get tasks by board ID
 router.get('/board/:boardId', getTasksByBoard);
+
+router.patch('/:id/priority', authMiddleware, updateTaskPriority);
+
+router.patch('/:id/story-points', authMiddleware, assignStoryPoints);
+
+router.patch('/:id/move-to-sprint', authMiddleware, moveTaskToSprint);
+
 // Get a specific task by ID
 router.get('/:id', getTaskById);
 // Update a task
