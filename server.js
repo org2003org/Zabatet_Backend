@@ -1,5 +1,6 @@
 import express from "express";
 import cors from "cors";
+import cookieParser from "cookie-parser";
 import { connectDB } from "./config/db.js";
 import dotenv from "dotenv";
 import mainRouter from "./routes/index.js";
@@ -15,6 +16,7 @@ app.use(cors({
 const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
+app.use(cookieParser());
 app.use("/api", mainRouter);
 connectDB();
 app.use(notFoundHandler);
