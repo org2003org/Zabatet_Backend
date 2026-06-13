@@ -15,6 +15,7 @@ app.use(cors({
       'http://localhost:5173',
       'http://localhost:3000',
       'https://zabatet.onrender.com',
+      process.env.FrontEndUrl
     ].filter(Boolean);
     if (!origin || allowed.includes(origin)) return callback(null, true);
     return callback(new Error('Not allowed by CORS'));
